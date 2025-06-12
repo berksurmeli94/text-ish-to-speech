@@ -36,3 +36,5 @@ pip install -r requirements.txt
 
 # (Optional) run full setup
 make setup
+make
+make clean
