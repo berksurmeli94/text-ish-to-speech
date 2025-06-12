@@ -14,7 +14,7 @@ Convert `.epub` books into educational audiobooks — offline and fully automate
 
 ---
 
-## 🚀 Setup
+## 🚀 Setup & Run
 
 ### 1. Clone the repo, install system dependencies, and set up the environment:
 
@@ -34,7 +34,7 @@ source .venv/bin/activate
 # Install Python packages
 pip install -r requirements.txt
 
-# (Optional) run full setup
+# Run
 make setup
 make
 make clean
