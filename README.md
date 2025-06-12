@@ -1,42 +1,38 @@
 # 🎧 Text-ish to Speech
 
-Convert any `.epub` book into a fully narrated audiobook — complete with chapter announcements, educational tone, and clean `.m4b` export. All locally, no AI API keys needed.
+Convert `.epub` books into educational audiobooks — offline and fully automated with chapter intros, silence spacing, and `.m4b` export.
 
 ---
 
 ## 📚 Features
 
-- ✅ Converts `.epub` files to MP3 chunks using `pyttsx3` (offline text-to-speech)
-- ✅ Generates chapter intros using natural-sounding `edge-tts` voices
-- ✅ Merges everything into a single audiobook with silence buffers
-- ✅ Exports in `.m4b` format (iTunes & audiobook player friendly)
-- ✅ One-command automation via Makefile
+- 🎙️ Converts `.epub` to MP3 chunks using `pyttsx3` (offline)
+- 📢 Generates natural-sounding chapter intros with `edge-tts`
+- 🧩 Merges parts with silence and intros
+- 📦 Exports a clean `.m4b` file
+- 🛠️ Fully automated with a `Makefile`
 
 ---
 
 ## 🚀 Setup
 
-> Recommended Python: **3.10.13**
+### 1. Clone the repo, install system dependencies, and set up the environment:
 
-1. Clone the repo:
-   ```bash
-   git clone https://github.com/berksurmeli94/text-ish-to-speech.git
-   cd text-ish-to-speech
+```bash
+git clone https://github.com/berksurmeli94/text-ish-to-speech.git
+cd text-ish-to-speech
 
-2. setup
-brew install ffmpeg   # on macOS
+# Install system dependencies
+brew install ffmpeg        # macOS
 # or
-sudo apt install ffmpeg  # on Ubuntu/Debian
+sudo apt install ffmpeg    # Ubuntu/Debian
 
-3. create and activate virtualenv
+# Create and activate a virtual environment
 python3.10 -m venv .venv
 source .venv/bin/activate
 
-4. installing depedencies
+# Install Python packages
 pip install -r requirements.txt
 
-5. run
+# (Optional) run full setup
 make setup
-make
-make clean
-
