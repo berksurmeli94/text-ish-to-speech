@@ -4,6 +4,7 @@ import zipfile
 import asyncio
 from bs4 import BeautifulSoup
 from edge_tts import Communicate
+from tts_with_pauses import CommWithPauses
 
 VOICE = "en-US-JennyNeural"
 CHUNK_SIZE = 5000
@@ -36,10 +37,11 @@ def chunk_text(text, max_length):
 
 async def speak(text, filename):
     try:
-        communicate = Communicate(text, VOICE)
-        await communicate.save(filename)
+        tts = CommWithPauses(text)
+        await tts.save(filename)
     except Exception as e:
         raise RuntimeError(f"❌ Failed to synthesize audio for chunk → {e}")
+
 
 async def main(epub_file):
     try:

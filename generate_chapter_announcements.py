@@ -1,6 +1,7 @@
 import os
 import asyncio
 from edge_tts import Communicate
+from tts_with_pauses import CommWithPauses
 
 VOICE = "en-US-JennyNeural"
 AUDIOBOOK_DIR = "audiobook"
@@ -8,8 +9,8 @@ OUTPUT_DIR = "chapter_announcements"
 
 async def speak(text, filename):
     try:
-        communicate = Communicate(text, VOICE)
-        await communicate.save(filename)
+        tts = CommWithPauses(text)  # Always use the custom class
+        await tts.save(filename)
     except Exception as e:
         raise RuntimeError(f"Failed to generate audio for '{text}' → {e}")
 
