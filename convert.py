@@ -2,6 +2,7 @@ import sys
 import os
 import zipfile
 import asyncio
+import time
 from bs4 import BeautifulSoup
 from edge_tts import Communicate
 from tts_with_pauses import CommWithPauses
@@ -9,6 +10,7 @@ from tts_with_pauses import CommWithPauses
 VOICE = "en-US-JennyNeural"
 CHUNK_SIZE = 5000
 OUTPUT_DIR = "audiobook"
+CONCURRENCY_LIMIT = 5
 
 def extract_text_from_epub(epub_path):
     texts = []
@@ -54,11 +56,22 @@ async def main(epub_file):
         chunks = list(chunk_text(full_text, CHUNK_SIZE))
         os.makedirs(OUTPUT_DIR, exist_ok=True)
 
+        semaphore = asyncio.Semaphore(CONCURRENCY_LIMIT)
+
+        async def speak_with_semaphore(chunk, filename, index):
+            async with semaphore:
+                print(f"🎧 Generating part {index}")
+                await speak(chunk, filename)
+                print(f"✅ Saved: {filename}")
+
+        tasks = []
         for i, chunk in enumerate(chunks, start=1):
             filename = os.path.join(OUTPUT_DIR, f"part_{i}.mp3")
-            print(f"🎧 Generating part {i}")
-            await speak(chunk, filename)
-            print(f"✅ Saved: {filename}")
+            tasks.append(speak_with_semaphore(chunk, filename, i))
+
+        start = time.time()
+        await asyncio.gather(*tasks)
+        print(f"⏱️ Finished in {time.time() - start:.2f} seconds.")
 
     except Exception as e:
         print(f"❌ Error: {e}")
