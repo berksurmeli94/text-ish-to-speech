@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📖 Documentation
+    url: https://github.com/berksurmeli94/text-ish-to-speech#readme
+    about: Check the README for installation and usage instructions before opening an issue.
+  - name: 💬 Discussions
+    url: https://github.com/berksurmeli94/text-ish-to-speech/discussions
+    about: For questions and ideas that are not bugs or feature requests.
